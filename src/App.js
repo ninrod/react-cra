@@ -14,6 +14,12 @@ class App extends Component {
 
   toggleHandler = () => this.setState({showPersons: !this.state.showPersons});
 
+  deleteHander = (index) => {
+    const ps = [...this.state.persons];
+    ps.splice(index, 1);
+    this.setState({persons: ps});
+  };
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -31,7 +37,7 @@ class App extends Component {
           {this.state.persons.map(
             p => {
               return (
-                <Person age={p.age} name={p.name}/>
+                <Person age={p.age} name={p.name} click={this.deleteHander}/>
               );
             }
           )}
