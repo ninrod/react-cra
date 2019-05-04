@@ -32,10 +32,18 @@ class App extends Component {
   };
 
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>hi, I'm a react app</h1>
-        <button onClick={this.clickHandler}>clica!</button>
+        <button style={style} onClick={this.clickHandler}>clica!</button>
         <Person
           age={this.state.persons[0].age}
           name={this.state.persons[0].name}/>
