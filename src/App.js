@@ -8,7 +8,8 @@ class App extends Component {
       {name: 'evelize', age: 39},
       {name: 'filipe', age: 38},
       {name: 'juliana', age: 4}
-    ]
+    ],
+    showPersons: false
   };
 
   clickHandler = () => {
@@ -27,9 +28,11 @@ class App extends Component {
         {name: 'evelize', age: 39},
         {name: event.target.value, age: 38},
         {name: 'juliana', age: 4}
-      ]
+      ],
     });
   };
+
+  toggleHandler = () => this.setState({showPersons: !this.state.showPersons});
 
   render() {
     const style = {
@@ -40,23 +43,33 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if(this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            age={this.state.persons[0].age}
+            name={this.state.persons[0].name}/>
+          <Person
+            age={this.state.persons[1].age}
+            name={this.state.persons[1].name}
+            change={this.nameHandler}
+          />
+          <Person
+            age={this.state.persons[2].age}
+            name={this.state.persons[2].name}>
+            LoL!!!
+          </Person>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>hi, I'm a react app</h1>
-        <button style={style} onClick={this.clickHandler}>clica!</button>
-        <Person
-          age={this.state.persons[0].age}
-          name={this.state.persons[0].name}/>
-        <Person
-          age={this.state.persons[1].age}
-          name={this.state.persons[1].name}
-          change={this.nameHandler}
-        />
-        <Person
-          age={this.state.persons[2].age}
-          name={this.state.persons[2].name}>
-          LoL!!!
-        </Person>
+        <button style={style} onClick={this.toggleHandler}>toggle</button>
+        {persons}
       </div>
     );
   }
