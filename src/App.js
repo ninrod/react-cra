@@ -12,26 +12,6 @@ class App extends Component {
     showPersons: false
   };
 
-  clickHandler = () => {
-    this.setState({
-      persons: [
-        {name: 'EVELIZE', age: 339},
-        {name: 'FILIPE', age: 338},
-        {name: 'JULIANA', age: 44}
-      ]
-    });
-  };
-
-  nameHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: 'evelize', age: 39},
-        {name: event.target.value, age: 38},
-        {name: 'juliana', age: 4}
-      ],
-    });
-  };
-
   toggleHandler = () => this.setState({showPersons: !this.state.showPersons});
 
   render() {
@@ -48,19 +28,13 @@ class App extends Component {
     if(this.state.showPersons) {
       persons = (
         <div>
-          <Person
-            age={this.state.persons[0].age}
-            name={this.state.persons[0].name}/>
-          <Person
-            age={this.state.persons[1].age}
-            name={this.state.persons[1].name}
-            change={this.nameHandler}
-          />
-          <Person
-            age={this.state.persons[2].age}
-            name={this.state.persons[2].name}>
-            LoL!!!
-          </Person>
+          {this.state.persons.map(
+            p => {
+              return (
+                <Person age={p.age} name={p.name}/>
+              );
+            }
+          )}
         </div>
       );
     }
